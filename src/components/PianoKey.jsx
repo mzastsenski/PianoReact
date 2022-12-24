@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
+import { useContext } from "react";
+import { Context } from "../context";
 
-export default function PianoKey({
-  className,
-  note,
-  playNoteTouch,
-  activeNote,
-}) {
+export default function PianoKey({ className, note }) {
+  const { playNoteTouch, activeNote } = useContext(Context);
+
   const [active, setActive] = useState(false);
 
   useEffect(() => {
@@ -20,7 +19,7 @@ export default function PianoKey({
         setActive(false);
       }, 150);
     }
-  }, [activeNote]);
+  }, [activeNote, note]);
 
   const activeOn = (e) => {
     if (e.key === note && !e.repeat) {
@@ -38,7 +37,7 @@ export default function PianoKey({
 
   return (
     <div
-      className={active ? `${className}  playing` : `${className}`}
+      className={active ? `${className} playing` : `${className}`}
       data-note={note}
       onClick={() => playNoteTouch(note)}
     ></div>

@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
-import { piano1, dataSongs, keys } from "./data";
-import Piano from "./Piano";
-import Songs from "./Songs";
-import Buttons from "./Buttons";
 import "./style.sass";
+import { useState, useEffect } from "react";
+import { Context } from "./context";
+import { piano1, piano2, dataSongs, keys } from "./data";
+import Piano from "./components/Piano";
+import Songs from "./components/Songs";
+import Buttons from "./components/Buttons";
 
 export default function App() {
   const [sound, setSound] = useState(piano1);
@@ -61,11 +62,15 @@ export default function App() {
 
   const stopPlayingNote = (e) => {
     if (keys.indexOf(e.key) < 0) return;
-    // sound[e.key].pause();
-    // if (isRecord) {
-    //   const findet = record.find((el) => e.key === el.key && !el.delayStop);
-    //   findet.delayStop = Date.now() - startTime;
-    // }
+    if (sound === piano2) {
+      setTimeout(() => {
+        sound[e.key].pause();
+      }, 100);
+      if (isRecord) {
+        const findet = record.find((el) => e.key === el.key && !el.delayStop);
+        findet.delayStop = Date.now() - startTime;
+      }
+    }
   };
 
   const recordStart = () => {
@@ -125,31 +130,29 @@ export default function App() {
   };
 
   return (
-    <div>
-      <Piano playNoteTouch={playNoteTouch} activeNote={activeNote} />
-
-      <Buttons
-        isRecord={isRecord}
-        recordStart={recordStart}
-        stop={stop}
-        isPlaying={isPlaying}
-        playRecord={playRecord}
-        saveSong={saveSong}
-        sound={sound}
-        setSound={setSound}
-      />
+    <Context.Provider
+      value={{
+        isRecord,
+        recordStart,
+        stop,
+        isPlaying,
+        playRecord,
+        saveSong,
+        sound,
+        setSound,
+        playNoteTouch,
+        playSong,
+        activeNote,
+        deleteSong,
+      }}
+    >
+      <Piano />
+      <Buttons />
       <div className="songs_container">
         {songs.map((e, i) => (
-          <Songs
-            key={i + 1}
-            idx={i}
-            song={e}
-            playSong={playSong}
-            deleteSong={deleteSong}
-            isPlaying={isPlaying}
-          />
+          <Songs key={i + 1} idx={i} song={e} />
         ))}
       </div>
-    </div>
+    </Context.Provider>
   );
 }

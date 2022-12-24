@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
+import { useContext } from "react";
+import { Context } from "../context";
 
-export default function Songs({ song, playSong, deleteSong, idx, isPlaying }) {
+export default function Songs({ song, idx }) {
+  const { deleteSong, isPlaying, playSong } = useContext(Context);
   const [active, setActive] = useState(false);
 
   useEffect(() => {

@@ -16,7 +16,7 @@ export const piano1 = {
   l: new Audio(`./sounds/054.wav`),
   p: new Audio(`./sounds/055.wav`),
   ";": new Audio(`./sounds/056.wav`),
-  "'": new Audio(`./sounds/f.mp3`),
+  "'": new Audio(`./sounds/f2.mp3`),
 };
 export const piano2 = {
   a: new Audio(`./sounds/a.mp3`),

@@ -1,16 +1,20 @@
-import { piano1, piano2 } from "./data";
+import { piano1, piano2 } from "../data";
 import { useEffect, useState } from "react";
+import { useContext } from "react";
+import { Context } from "../context";
 
-export default function Buttons({
-  isRecord,
-  recordStart,
-  stop,
-  isPlaying,
-  playRecord,
-  saveSong,
-  sound,
-  setSound,
-}) {
+export default function Buttons() {
+  const {
+    isRecord,
+    recordStart,
+    stop,
+    isPlaying,
+    playRecord,
+    saveSong,
+    sound,
+    setSound,
+  } = useContext(Context);
+
   const [soundName, setSoundName] = useState("");
 
   useEffect(() => {

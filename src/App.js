@@ -88,6 +88,11 @@ export default function App() {
         sound[e.key].currentTime = 0;
         sound[e.key].play();
         setActiveNote(e.key);
+        if (i > 0 && e.key === song[i - 1].key)
+          setActiveNote(`${e.key}${e.key}`); ///  if note will repeat
+        if (i > 1 && e.key === song[i - 2].key) setActiveNote(e.key);
+        if (i > 2 && e.key === song[i - 3].key)
+          setActiveNote(`${e.key}${e.key}`);
       }, e.delay);
       arr.push(timeout);
       if (i === song.length - 1) {
@@ -107,7 +112,10 @@ export default function App() {
   };
 
   const saveSong = () => {
-    if (save.length) setSongs([...songs, save]);
+    if (save.length) {
+      setSongs([...songs, save]);
+      setSave([]);
+    }
   };
 
   const deleteSong = (e, idx) => {
@@ -134,10 +142,10 @@ export default function App() {
         {songs.map((e, i) => (
           <Songs
             key={i + 1}
+            idx={i}
             song={e}
             playSong={playSong}
             deleteSong={deleteSong}
-            idx={i}
             isPlaying={isPlaying}
           />
         ))}

@@ -14,13 +14,12 @@ export default function PianoKey({
   });
 
   useEffect(() => {
-    if (activeNote === note) {
+    if (activeNote === note || activeNote === `${note}${note}`) {
       setActive(true);
       setTimeout(() => {
         setActive(false);
       }, 150);
     }
-    // return () => setActive(false);
   }, [activeNote]);
 
   const activeOn = (e) => {

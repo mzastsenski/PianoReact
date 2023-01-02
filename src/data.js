@@ -89,7 +89,152 @@ export const elise3 = [
   { key: "h", delay: 16668, delayStop: 17924 },
 ];
 
-export const dataSongs = [elis, elise3];
+export const elochka = [
+  [
+    {
+      key: "a",
+      delay: 1852,
+      delayStop: null,
+    },
+    {
+      key: "h",
+      delay: 2552,
+      delayStop: null,
+    },
+    {
+      key: "h",
+      delay: 3101,
+      delayStop: null,
+    },
+    {
+      key: "g",
+      delay: 3586,
+      delayStop: null,
+    },
+    {
+      key: "h",
+      delay: 4152,
+      delayStop: null,
+    },
+    {
+      key: "f",
+      delay: 4670,
+      delayStop: null,
+    },
+    {
+      key: "a",
+      delay: 5336,
+      delayStop: null,
+    },
+    {
+      key: "a",
+      delay: 5939,
+      delayStop: null,
+    },
+    {
+      key: "a",
+      delay: 6471,
+      delayStop: null,
+    },
+    {
+      key: "h",
+      delay: 7373,
+      delayStop: null,
+    },
+    {
+      key: "h",
+      delay: 7907,
+      delayStop: null,
+    },
+    {
+      key: "u",
+      delay: 8491,
+      delayStop: null,
+    },
+    {
+      key: "l",
+      delay: 9075,
+      delayStop: null,
+    },
+    {
+      key: "k",
+      delay: 9758,
+      delayStop: null,
+    },
+    {
+      key: "k",
+      delay: 11258,
+      delayStop: null,
+    },
+    {
+      key: "s",
+      delay: 11908,
+      delayStop: null,
+    },
+    {
+      key: "s",
+      delay: 12459,
+      delayStop: null,
+    },
+    {
+      key: "u",
+      delay: 13061,
+      delayStop: null,
+    },
+    {
+      key: "u",
+      delay: 13594,
+      delayStop: null,
+    },
+    {
+      key: "h",
+      delay: 14095,
+      delayStop: null,
+    },
+    {
+      key: "g",
+      delay: 14678,
+      delayStop: null,
+    },
+    {
+      key: "f",
+      delay: 15195,
+      delayStop: null,
+    },
+    {
+      key: "a",
+      delay: 15846,
+      delayStop: null,
+    },
+    {
+      key: "h",
+      delay: 16563,
+      delayStop: null,
+    },
+    {
+      key: "h",
+      delay: 17113,
+      delayStop: null,
+    },
+    {
+      key: "g",
+      delay: 17680,
+      delayStop: null,
+    },
+    {
+      key: "h",
+      delay: 18314,
+      delayStop: null,
+    },
+    {
+      key: "f",
+      delay: 19165,
+      delayStop: null,
+    },
+  ],
+];
+
+export const dataSongs = [elis, elise3, elochka];
 
 export const keys = [
   "a",

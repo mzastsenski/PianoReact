@@ -18,10 +18,10 @@ export default function App() {
   const [activeNote, setActiveNote] = useState("");
 
   useEffect(() => {
-    window.addEventListener("keypress", playNote);
+    window.addEventListener("keydown", playNote);
     window.addEventListener("keyup", stopPlayingNote);
     return () => {
-      window.removeEventListener("keypress", playNote);
+      window.removeEventListener("keydown", playNote);
       window.removeEventListener("keyup", stopPlayingNote);
     };
   });

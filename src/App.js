@@ -3,8 +3,9 @@ import { useState, useEffect } from "react";
 import { Context } from "./context";
 import { piano1, piano2, dataSongs, keys } from "./data";
 import Piano from "./components/Piano";
-import Songs from "./components/Songs";
+import Song from "./components/Song";
 import Buttons from "./components/Buttons";
+import Header from "./components/Header/Header";
 
 export default function App() {
   const [sound, setSound] = useState(piano1);
@@ -16,6 +17,7 @@ export default function App() {
   const record = [];
   const [timeoutArr, setTimeoutArr] = useState([]);
   const [activeNote, setActiveNote] = useState("");
+  const [menuOpened, setOpened] = useState(false);
 
   useEffect(() => {
     window.addEventListener("keydown", playNote);
@@ -132,6 +134,7 @@ export default function App() {
   return (
     <Context.Provider
       value={{
+        songs,
         isRecord,
         recordStart,
         stop,
@@ -144,13 +147,16 @@ export default function App() {
         playSong,
         activeNote,
         deleteSong,
+        menuOpened,
+        setOpened,
       }}
     >
+      <Header />
       <Piano />
       <Buttons />
       <div className="songs_container">
         {songs.map((e, i) => (
-          <Songs key={i + 1} idx={i} song={e} />
+          <Song key={i + 1} idx={i} song={e} />
         ))}
       </div>
     </Context.Provider>

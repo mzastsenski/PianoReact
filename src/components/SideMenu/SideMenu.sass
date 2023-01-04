@@ -1,10 +1,10 @@
 $menu-width: 240px
 $main-color: rgb(22, 124, 192)
 
+
 .side_menu 
   position: fixed
   z-index: 2
-  background-color: #0a2acd
   background-color: $main-color
   top: 0
   right: 0
@@ -14,15 +14,36 @@ $main-color: rgb(22, 124, 192)
   width: $menu-width
   height: 100%
   padding: 22px 12px
-  font-size: 16px
+  font-size: 18px
+  letter-spacing: 2.5px
   overflow: scroll
   transition: 0.28s
-  // transform: translateX(calc($menu-width * -1))
   transform: translateX($menu-width)
   .side_menu_title
-    padding-top: 55px
+    padding-top: 65px
     padding-bottom: 16px
+  .song_item
+    margin: 5px 0
+    background-color: $main-color 
+    display: flex
+    input
+      background-color: $main-color 
+      color: white
+      height: 26px
+      text-align: center
+      max-width: 90px  
+      font-size: 16px
+      letter-spacing: 2px
+      font-family: sans-serif
+    button
+      background: $main-color 
+      color: white
+      padding: 4px 6px
+      border-radius: 4px 
+      font-size: 13px
+      margin-left: 5px
+      &:hover
+        background: red
 
 .show 
   transform: translateX(0)
-

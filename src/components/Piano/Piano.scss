@@ -27,12 +27,12 @@ body {
   justify-content: space-between;
   min-height: 100vh;
   font-family: var(--font-family);
-  background-image: linear-gradient(
-    to left,
-    var(--bg-color),
-    var(--soapstone) 50%,
-    var(--bg-color)
-  );
+  // background-image: linear-gradient(
+  //   to left,
+  //   var(--bg-color),
+  //   var(--soapstone) 50%,
+  //   var(--bg-color)
+  // );
 }
 
 .keys {

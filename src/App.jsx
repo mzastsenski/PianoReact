@@ -1,7 +1,8 @@
 import "./App.sass";
 import { useState, useEffect } from "react";
 import { Context } from "./context";
-import { piano1, piano2, dataSongs, keys } from "./data";
+import { piano1, piano2, keys } from "./data";
+import { defaultSongs } from "./data/default_songs";
 import Piano from "./components/Piano/Piano";
 import Buttons from "./components/Buttons/Buttons";
 import Header from "./components/Header/Header";
@@ -9,12 +10,11 @@ import SongsContainer from "./components/SongsContainer/SongsContainer";
 
 export default function App() {
   const [sound, setSound] = useState(piano1);
-  const [songs, setSongs] = useState([...dataSongs]);
+  const [songs, setSongs] = useState([...defaultSongs]);
   const [isRecord, setRecord] = useState(false);
   const [isPlaying, setPlaying] = useState(false);
   const [startTime, setStartTime] = useState(0);
-  const [save, setSave] = useState([]);
-  const record = [];
+  const [record, setRecordBuffer] = useState([]);
   const [timeoutArr, setTimeoutArr] = useState([]);
   const [activeNote, setActiveNote] = useState("");
   const [menuOpened, setOpened] = useState(false);
@@ -83,7 +83,6 @@ export default function App() {
   const stop = () => {
     setRecord(false);
     setPlaying(false);
-    setSave(record);
     timeoutArr.forEach((e) => clearTimeout(e));
   };
 
@@ -115,13 +114,18 @@ export default function App() {
   };
 
   const playRecord = () => {
-    if (save.length) playSong(save);
+    if (record.length) playSong(record);
   };
 
   const saveSong = () => {
-    if (save.length) {
-      setSongs([...songs, save]);
-      setSave([]);
+    if (record.length) {
+      const newSong = {
+        user: "",
+        title: `My Song ${songs.length + 1}`,
+        song: record,
+      };
+      setSongs([...songs, newSong]);
+      setRecordBuffer([]);
     }
   };
 
@@ -130,9 +134,16 @@ export default function App() {
     setSongs(songs.filter((e, i) => i !== idx));
   };
 
+  const saveTitle = (text, song) => {
+    song.title = text;
+    setSongs([...songs]);
+    localStorage.setItem("songs", JSON.stringify(songs));
+  };
+
   return (
     <Context.Provider
       value={{
+        saveTitle,
         songs,
         isRecord,
         recordStart,

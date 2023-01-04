@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 import { BiUser as UserIcon } from "react-icons/bi";
 
 export default function Header(props) {
-  const user = "Sfsdaoufjjdsf";
+  const user = "Kolja";
 
   return (
     <div className="header">

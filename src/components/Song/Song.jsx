@@ -1,6 +1,7 @@
+import "./Song.sass"
 import { useState, useEffect } from "react";
 import { useContext } from "react";
-import { Context } from "../context";
+import { Context } from "../../context";
 
 export default function Songs({ song, idx }) {
   const { deleteSong, isPlaying, playSong } = useContext(Context);

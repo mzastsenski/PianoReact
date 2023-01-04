@@ -1,11 +1,11 @@
-import "./style.sass";
+import "./App.sass";
 import { useState, useEffect } from "react";
 import { Context } from "./context";
 import { piano1, piano2, dataSongs, keys } from "./data";
-import Piano from "./components/Piano";
-import Song from "./components/Song";
-import Buttons from "./components/Buttons";
+import Piano from "./components/Piano/Piano";
+import Buttons from "./components/Buttons/Buttons";
 import Header from "./components/Header/Header";
+import SongsContainer from "./components/SongsContainer/SongsContainer";
 
 export default function App() {
   const [sound, setSound] = useState(piano1);
@@ -127,8 +127,7 @@ export default function App() {
 
   const deleteSong = (e, idx) => {
     e.stopPropagation();
-    const newSongs = songs.filter((e, i) => i !== idx);
-    setSongs(newSongs);
+    setSongs(songs.filter((e, i) => i !== idx));
   };
 
   return (
@@ -154,11 +153,7 @@ export default function App() {
       <Header />
       <Piano />
       <Buttons />
-      <div className="songs_container">
-        {songs.map((e, i) => (
-          <Song key={i + 1} idx={i} song={e} />
-        ))}
-      </div>
+      <SongsContainer />
     </Context.Provider>
   );
 }

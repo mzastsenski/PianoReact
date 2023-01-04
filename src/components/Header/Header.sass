@@ -1,0 +1,56 @@
+$main-color: rgb(22, 124, 192)
+// $main-color: rgb(32, 32, 32)
+$icon-hover: rgba(255, 255, 255, 0.781)
+
+.header 
+  position: relative
+  background-color: $main-color
+  display: grid
+  grid-template-columns: 1fr 180px 40px 26px
+  text-align: center
+  align-items: center
+  color: white
+  width: 100%
+  height: 77px
+  font-size: 18px
+  font-family: "Lato", sans-serif
+  letter-spacing: 3.2px
+  .title 
+    font-size: 29px
+    padding-left: 80px  
+  a 
+    color: white
+    text-decoration: none  
+    display: flex
+    justify-content: center
+    align-items: center
+    &:hover 
+      color: $icon-hover
+    .login_icons 
+      display: flex
+      align-items: center
+      position: absolute
+      right: 67px
+      top: 23px
+  
+  a.active 
+    background-color: transparent
+    color: white
+  
+  .user_name 
+    background-color: $main-color
+    align-self: center
+    color: white
+    &:hover 
+      color: $icon-hover
+      
+
+
+@media (max-width: 768px) 
+  .header 
+    .title 
+      font-size: 22px
+      // padding-left: 110px    
+    
+  
+

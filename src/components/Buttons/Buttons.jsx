@@ -1,7 +1,8 @@
-import { piano1, piano2 } from "../data";
+import "./Buttons.sass";
+import { piano1, piano2 } from "../../data";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
-import { Context } from "../context";
+import { Context } from "../../context";
 
 export default function Buttons() {
   const {
@@ -18,11 +19,11 @@ export default function Buttons() {
   const [soundName, setSoundName] = useState("");
 
   useEffect(() => {
-    if (sound === piano1) setSoundName("piano1");
-    else setSoundName("piano2");
+    sound === piano1 ? setSoundName("piano1") : setSoundName("piano2");
   }, [sound]);
 
-  const style = { background: "#4034eb" };
+  let button_color = "rgb(22, 124, 192)";
+  button_color = "#4329d4";
 
   return (
     <div className="buttons">
@@ -41,13 +42,13 @@ export default function Buttons() {
       </button>
       <button onClick={saveSong}>Save</button>
       <button
-        style={soundName === "piano1" ? style : {}}
+        style={soundName === "piano1" ? { background: button_color } : {}}
         onClick={() => setSound(piano1)}
       >
         Sound Piano1
       </button>
       <button
-        style={soundName === "piano2" ? style : {}}
+        style={soundName === "piano2" ? { background: button_color } : {}}
         onClick={() => setSound(piano2)}
       >
         Sound Piano2

@@ -16,14 +16,6 @@
   --font-family: "Source Serif Pro", serif;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  border: none;
-  outline: none;
-  box-sizing: border-box;
-}
-
 html {
   font-size: 10px;
 }
@@ -91,7 +83,7 @@ body {
 }
 
 .sharp {
-  z-index: 10;
+  z-index: 1;
   margin-top: -0.1rem !important;
   position: absolute !important;
   height: 45% !important;

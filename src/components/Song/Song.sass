@@ -1,37 +1,18 @@
-.buttons 
-  display: flex
-  justify-content: center
-  button 
-    mix-width: 70px
-    margin: 12px
-    padding: 10px 16px
-    font-family: 'Lato', sans-serif
-    font-size: 16px
-    border-radius: 12px
-    border: transparent
-    background: #7e7d7d
-    color: white
-
-    &:hover
-      background: #2c0aec
-      color: white
-
-.songs_container
-  display: flex
-  justify-content: center
+$main-color: rgb(22, 124, 192) 
 
 .song 
   position: relative
   text-align: center
   border: 1px solid black
-  width: 110px
-  padding: 17px
+  width: 100px
+  padding: 12px 
   margin: 12px
   cursor: pointer
-  border-radius: 21px
+  border-radius: 16px
   &:hover
-    background: #3f21ea
+    background: $main-color
     color: white
+    border: 1px solid $main-color 
 
   .delete_button
     position: absolute

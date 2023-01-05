@@ -21,7 +21,6 @@ export default function Songs({ song }) {
   const click = () => {
     playSong(song.song);
     setActiveSong(song);
-    // setActive(true);
   };
 
   return (

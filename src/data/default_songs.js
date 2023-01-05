@@ -1,4 +1,5 @@
 const elise1 = {
+  id: 1,
   user: "",
   title: "Elise1",
   song: [
@@ -15,6 +16,7 @@ const elise1 = {
 };
 
 const elise2 = {
+  id: 2,
   user: "",
   title: "Elise2",
   song: [
@@ -57,6 +59,7 @@ const elise2 = {
 };
 
 const elochka = {
+  id: 3,
   user: "",
   title: "Elochka",
   song: [

@@ -1,4 +1,11 @@
 import "./App.sass";
+// import { v4 as uuid } from "uuid";
+import {
+  postSongToDB,
+  editSong,
+  deleteSongFromDB,
+  getAllSongs,
+} from "./requests";
 import { useState, useEffect } from "react";
 import { Context } from "./context";
 import { piano1, piano2, keys } from "./data";
@@ -29,26 +36,16 @@ export default function App() {
     };
   });
 
-  // const postData = (data) => {
-  //   fetch("api/mongo", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json;charset=utf-8",
-  //     },
-  //     body: JSON.stringify(data),
-  //   })
-  //     .then((res) => res.json())
-  //     .then(console.log);
-  // };
-
   useEffect(() => {
-    if (localStorage.getItem("songs"))
-      setSongs(JSON.parse(localStorage.getItem("songs")));
+    // getAllSongs(setSongs);
+    if (localStorage.getItem("songs")) {
+      const localSongs = JSON.parse(localStorage.getItem("songs"));
+      if (localSongs.length) setSongs(localSongs);
+    }
   }, []);
 
   useEffect(() => {
     localStorage.setItem("songs", JSON.stringify(songs));
-    // postData(songs);
   }, [songs]);
 
   const playNote = (e) => {
@@ -137,24 +134,28 @@ export default function App() {
   const saveSong = () => {
     if (record.length) {
       const newSong = {
+        id: Date.now(),
         user: "",
         title: `My Song ${songs.length + 1}`,
         song: record,
       };
       setSongs([...songs, newSong]);
       setRecordBuffer([]);
+      // postSongToDB(newSong);
     }
   };
 
-  const deleteSong = (e, idx) => {
+  const deleteSong = (e, id) => {
     e.stopPropagation();
-    setSongs(songs.filter((e, i) => i !== idx));
+    setSongs(songs.filter((e) => e.id !== id));
+    // deleteSongFromDB({ id: id });
   };
 
   const saveTitle = (text, song) => {
     song.title = text;
     setSongs([...songs]);
     localStorage.setItem("songs", JSON.stringify(songs));
+    // editSong(song);
   };
 
   return (

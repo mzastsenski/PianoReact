@@ -66,7 +66,7 @@ export default function Buttons() {
         }
         onClick={() => setSound(piano2)}
       >
-        Sound2
+        Sound 2
       </button>
     </div>
   );

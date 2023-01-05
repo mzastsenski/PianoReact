@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useContext } from "react";
 import { Context } from "../../context";
 
-export default function Songs({ song, idx }) {
+export default function Songs({ song }) {
   const { deleteSong, isPlaying, playSong, saveTitle, stop } =
     useContext(Context);
   const [active, setActive] = useState(false);
@@ -31,7 +31,7 @@ export default function Songs({ song, idx }) {
       />
       <button onClick={() => playSong(song.song)}>P</button>
       <button onClick={() => stop()}>S</button>
-      <button onClick={(e) => deleteSong(e, idx)}>X</button>
+      <button onClick={(e) => deleteSong(e, song.id)}>X</button>
     </div>
   );
 }

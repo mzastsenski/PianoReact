@@ -1,4 +1,4 @@
-import "./SongsContainer.sass"
+import "./SongsContainer.sass";
 import { useContext } from "react";
 import { Context } from "../../context";
 import Song from "../Song/Song";
@@ -8,7 +8,7 @@ export default function SongsContainer() {
   return (
     <div className="songs_container">
       {songs.map((e, i) => (
-        <Song key={i + 1} idx={i} song={e} />
+        <Song key={i + 1} song={e} />
       ))}
     </div>
   );

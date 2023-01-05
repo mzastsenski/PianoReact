@@ -3,6 +3,7 @@ import { piano1, piano2 } from "../../data";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
 import { Context } from "../../context";
+import { BsRecordCircle, BsStopCircle, BsPlayCircle } from "react-icons/bs";
 
 export default function Buttons() {
   const {
@@ -22,36 +23,50 @@ export default function Buttons() {
     sound === piano1 ? setSoundName("piano1") : setSoundName("piano2");
   }, [sound]);
 
-  let button_color = "rgb(22, 124, 192)";
-  button_color = "#4329d4";
+  let size = 40;
 
   return (
     <div className="buttons">
       <button
-        style={isRecord ? { background: "red" } : {}}
+        className="action_button"
+        style={isRecord ? { background: "red", color: "white" } : {}}
         onClick={recordStart}
       >
-        Record
+        <BsRecordCircle size={size} className="record" />
       </button>
-      <button onClick={stop}>Stop</button>
+      <button className="action_button" onClick={stop}>
+        <BsStopCircle size={size} className="stop" />
+      </button>
       <button
-        style={isPlaying ? { background: "green" } : {}}
+        className="action_button"
+        style={isPlaying ? { background: "green", color: "white" } : {}}
         onClick={playRecord}
       >
-        Play Record
+        <BsPlayCircle size={size} className="play" />
       </button>
-      <button onClick={saveSong}>Save</button>
+
+      <button className="action_button save" onClick={saveSong}>
+        Save
+      </button>
       <button
-        style={soundName === "piano1" ? { background: button_color } : {}}
+        className={
+          soundName === "piano1"
+            ? "sound_button sound_button_active"
+            : "sound_button"
+        }
         onClick={() => setSound(piano1)}
       >
-        Sound Piano1
+        Sound 1
       </button>
       <button
-        style={soundName === "piano2" ? { background: button_color } : {}}
+        className={
+          soundName === "piano2"
+            ? "sound_button sound_button_active"
+            : "sound_button"
+        }
         onClick={() => setSound(piano2)}
       >
-        Sound Piano2
+        Sound2
       </button>
     </div>
   );

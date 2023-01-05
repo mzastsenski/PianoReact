@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 import { BiUser as UserIcon } from "react-icons/bi";
 
 export default function Header(props) {
-  const user = "Kolja";
+  const user = "User";
 
   return (
     <div className="header">
@@ -16,7 +16,7 @@ export default function Header(props) {
         </NavLink>
       </span>
       <div>
-        <NavLink to="/Login" className="user_name">
+        <NavLink to="/" className="user_name">
           <span className="login_icons">
             &nbsp;{user ? user : "Login"}&nbsp;
             <UserIcon size={31} />

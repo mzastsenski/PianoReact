@@ -15,6 +15,7 @@ export default function App() {
   const [isPlaying, setPlaying] = useState(false);
   const [startTime, setStartTime] = useState(0);
   const [record, setRecordBuffer] = useState([]);
+  const [playBuffer, setPlayBuffer] = useState(defaultSongs[1].song);
   const [timeoutArr, setTimeoutArr] = useState([]);
   const [activeNote, setActiveNote] = useState("");
   const [menuOpened, setOpened] = useState(false);
@@ -28,6 +29,18 @@ export default function App() {
     };
   });
 
+  // const postData = (data) => {
+  //   fetch("api/mongo", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json;charset=utf-8",
+  //     },
+  //     body: JSON.stringify(data),
+  //   })
+  //     .then((res) => res.json())
+  //     .then(console.log);
+  // };
+
   useEffect(() => {
     if (localStorage.getItem("songs"))
       setSongs(JSON.parse(localStorage.getItem("songs")));
@@ -35,6 +48,7 @@ export default function App() {
 
   useEffect(() => {
     localStorage.setItem("songs", JSON.stringify(songs));
+    // postData(songs);
   }, [songs]);
 
   const playNote = (e) => {
@@ -87,6 +101,7 @@ export default function App() {
   };
 
   const playSong = (song) => {
+    stop();
     setPlaying(true);
     const arr = [];
     song.forEach((e, i) => {
@@ -102,9 +117,10 @@ export default function App() {
       }, e.delay);
       arr.push(timeout);
       if (i === song.length - 1) {
-        setTimeout(() => {
+        const timeout2 = setTimeout(() => {
           setPlaying(false);
         }, e.delay + 1000);
+        arr.push(timeout2);
       }
       // setTimeout(() => {
       //   sound[e.key].pause();
@@ -115,6 +131,7 @@ export default function App() {
 
   const playRecord = () => {
     if (record.length) playSong(record);
+    // else if (playBuffer.length) playSong(playBuffer);
   };
 
   const saveSong = () => {

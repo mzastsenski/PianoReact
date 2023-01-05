@@ -1,7 +1,6 @@
 $menu-width: 240px
 $main-color: rgb(22, 124, 192)
 
-
 .side_menu 
   position: fixed
   z-index: 2
@@ -36,14 +35,19 @@ $main-color: rgb(22, 124, 192)
       letter-spacing: 2px
       font-family: sans-serif
     button
+      display: flex
+      align-items: center
       background: $main-color 
       color: white
-      padding: 4px 6px
+      padding: 2px
       border-radius: 4px 
-      font-size: 13px
       margin-left: 5px
-      &:hover
+    .delete:hover
         background: red
+    .play:hover
+        background: green
+    .stop:hover
+        background: rgba(244, 228, 0, 0.946)
 
 .show 
   transform: translateX(0)

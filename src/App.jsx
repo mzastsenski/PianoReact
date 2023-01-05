@@ -22,7 +22,7 @@ export default function App() {
   const [isPlaying, setPlaying] = useState(false);
   const [startTime, setStartTime] = useState(0);
   const [record, setRecordBuffer] = useState([]);
-  const [playBuffer, setPlayBuffer] = useState(defaultSongs[1].song);
+  const [activeSong, setActiveSong] = useState(defaultSongs[0]);
   const [timeoutArr, setTimeoutArr] = useState([]);
   const [activeNote, setActiveNote] = useState("");
   const [menuOpened, setOpened] = useState(false);
@@ -128,7 +128,7 @@ export default function App() {
 
   const playRecord = () => {
     if (record.length) playSong(record);
-    // else if (playBuffer.length) playSong(playBuffer);
+    else if (activeSong.song) playSong(activeSong.song);
   };
 
   const saveSong = () => {
@@ -161,7 +161,6 @@ export default function App() {
   return (
     <Context.Provider
       value={{
-        saveTitle,
         songs,
         isRecord,
         recordStart,
@@ -177,6 +176,9 @@ export default function App() {
         deleteSong,
         menuOpened,
         setOpened,
+        saveTitle,
+        activeSong,
+        setActiveSong,
       }}
     >
       <Header />

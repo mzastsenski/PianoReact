@@ -4,13 +4,15 @@ import { useContext } from "react";
 import { Context } from "../../context";
 
 export default function Songs({ song }) {
-  const { deleteSong, isPlaying, playSong, saveTitle } = useContext(Context);
-  const [active, setActive] = useState(false);
+  const {
+    deleteSong,
+    isPlaying,
+    playSong,
+    saveTitle,
+    activeSong,
+    setActiveSong,
+  } = useContext(Context);
   const [val, setVal] = useState(song.title);
-
-  useEffect(() => {
-    if (!isPlaying) setActive(false);
-  }, [isPlaying]);
 
   useEffect(() => {
     setVal(song.title);
@@ -18,18 +20,25 @@ export default function Songs({ song }) {
 
   const click = () => {
     playSong(song.song);
-    setActive(true);
+    setActiveSong(song);
+    // setActive(true);
   };
 
   return (
     <div
       className="song"
-      style={isPlaying && active ? { background: "green", color: "white" } : {}}
+      style={
+        isPlaying && activeSong && activeSong.id === song.id
+          ? { background: "green", color: "white" }
+          : {}
+      }
       onClick={click}
     >
       <input
         style={
-          isPlaying && active ? { background: "green", color: "white" } : {}
+          isPlaying && activeSong && activeSong.id === song.id
+            ? { background: "green", color: "white" }
+            : {}
         }
         value={val}
         onChange={(e) => setVal(e.target.value)}

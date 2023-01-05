@@ -8,8 +8,14 @@ export const postSongToDB = (data) => {
   });
 };
 
-export const checkUser = (setUser) =>
-  fetch("api/checkUser", { method: "POST" })
+export const checkUser = (user, setUser) =>
+  fetch("api/checkUser", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+    },
+    body: JSON.stringify({ user }),
+  })
     .then((res) => res.json())
     .then((res) => {
       if (res !== 200) {
@@ -21,7 +27,10 @@ export const checkUser = (setUser) =>
 export const getSongs = (user, setSongs) => {
   fetch(`api/getSongs/${user}`)
     .then((res) => res.json())
-    .then((res) => (res.length ? setSongs(res) : setSongs([])));
+    .then((res) => {
+      console.log(res)
+      res.length ? setSongs(res) : setSongs([]);
+    });
 };
 
 export const editSong = (data) => {

@@ -33,7 +33,7 @@ export default function App() {
   useEffect(() => {
     const userName = localStorage.getItem("user");
     if (userName) {
-      checkUser(setUser);
+      checkUser(userName, setUser);
       setUser(userName);
       getSongs(userName, setSongs);
     } else {
@@ -46,8 +46,10 @@ export default function App() {
   }, [user]);
 
   useEffect(() => {
-    if (!user) localStorage.setItem("songs", JSON.stringify(songs));
-  }, [songs, user]);
+    if (!localStorage.getItem("user")) {
+      localStorage.setItem("songs", JSON.stringify(songs));
+    }
+  }, [songs]);
 
   const playNote = (e) => {
     if (keys.indexOf(e.key) < 0 || e.repeat) return;
@@ -136,7 +138,7 @@ export default function App() {
     if (record.length) {
       const newSong = {
         id: Date.now(),
-        user: "",
+        user: user,
         title: `My Song ${songs.length + 1}`,
         song: record,
       };
@@ -149,13 +151,13 @@ export default function App() {
   const deleteSong = (e, id) => {
     e.stopPropagation();
     setSongs(songs.filter((e) => e.id !== id));
-    if (user) deleteSongFromDB({ id: id });
+    if (user) deleteSongFromDB({ user, id });
   };
 
   const saveTitle = (text, song) => {
     song.title = text;
     setSongs([...songs]);
-    localStorage.setItem("songs", JSON.stringify(songs));
+    if (!user) localStorage.setItem("songs", JSON.stringify(songs));
     if (user) editSong(song);
   };
 

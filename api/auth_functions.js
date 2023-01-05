@@ -9,11 +9,14 @@ const newAccessToken = (user) => {
 const auth = (req, res, next) => {
   const token = req.cookies.token;
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-    // console.log(req.body.user + " " + user.name + " " + req.params.user);
-    if (err) {
-      // console.log("error");
+    if (
+      err ||
+      (req.params.user && req.params.user !== user.name) ||
+      (req.body.user && req.body.user !== user.name)
+    ) {
       return res.json(401);
     }
+
     let exp = (1000 * user.exp - Date.now()) / 1000 / 60;
     if (exp < 20) {
       const newToken = newAccessToken({ name: user.name });

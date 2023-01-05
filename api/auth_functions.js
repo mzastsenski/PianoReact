@@ -10,10 +10,10 @@ const auth = (req, res, next) => {
   const token = req.cookies.token;
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
     // console.log(req.body.user + " " + user.name + " " + req.params.user);
-    // if (err || req.body.user != user.name) {
-    //   console.log("error")
-    //   return res.json(401);
-    // }
+    if (err) {
+      // console.log("error");
+      return res.json(401);
+    }
     let exp = (1000 * user.exp - Date.now()) / 1000 / 60;
     if (exp < 20) {
       const newToken = newAccessToken({ name: user.name });

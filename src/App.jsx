@@ -4,20 +4,23 @@ import {
   postSongToDB,
   editSong,
   deleteSongFromDB,
-  getAllSongs,
+  getSongs,
+  checkUser,
 } from "./requests";
 import { useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
 import { Context } from "./context";
 import { piano1, piano2, keys } from "./data";
 import { defaultSongs } from "./data/default_songs";
-import Piano from "./components/Piano/Piano";
-import Buttons from "./components/Buttons/Buttons";
 import Header from "./components/Header/Header";
-import SongsContainer from "./components/SongsContainer/SongsContainer";
+import Main from "./pages/Main";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
 export default function App() {
+  const [user, setUser] = useState("");
   const [sound, setSound] = useState(piano1);
-  const [songs, setSongs] = useState([...defaultSongs]);
+  const [songs, setSongs] = useState([]);
   const [isRecord, setRecord] = useState(false);
   const [isPlaying, setPlaying] = useState(false);
   const [startTime, setStartTime] = useState(0);
@@ -28,25 +31,23 @@ export default function App() {
   const [menuOpened, setOpened] = useState(false);
 
   useEffect(() => {
-    window.addEventListener("keydown", playNote);
-    window.addEventListener("keyup", stopPlayingNote);
-    return () => {
-      window.removeEventListener("keydown", playNote);
-      window.removeEventListener("keyup", stopPlayingNote);
-    };
-  });
-
-  useEffect(() => {
-    // getAllSongs(setSongs);
-    if (localStorage.getItem("songs")) {
-      const localSongs = JSON.parse(localStorage.getItem("songs"));
-      if (localSongs.length) setSongs(localSongs);
+    const userName = localStorage.getItem("user");
+    if (userName) {
+      checkUser(setUser);
+      setUser(userName);
+      getSongs(userName, setSongs);
+    } else {
+      if (localStorage.getItem("songs")) {
+        const localSongs = JSON.parse(localStorage.getItem("songs"));
+        if (localSongs.length) setSongs(localSongs);
+        else setSongs(defaultSongs);
+      }
     }
-  }, []);
+  }, [user]);
 
   useEffect(() => {
-    localStorage.setItem("songs", JSON.stringify(songs));
-  }, [songs]);
+    if (!user) localStorage.setItem("songs", JSON.stringify(songs));
+  }, [songs, user]);
 
   const playNote = (e) => {
     if (keys.indexOf(e.key) < 0 || e.repeat) return;
@@ -141,27 +142,31 @@ export default function App() {
       };
       setSongs([...songs, newSong]);
       setRecordBuffer([]);
-      // postSongToDB(newSong);
+      if (user) postSongToDB(newSong);
     }
   };
 
   const deleteSong = (e, id) => {
     e.stopPropagation();
     setSongs(songs.filter((e) => e.id !== id));
-    // deleteSongFromDB({ id: id });
+    if (user) deleteSongFromDB({ id: id });
   };
 
   const saveTitle = (text, song) => {
     song.title = text;
     setSongs([...songs]);
     localStorage.setItem("songs", JSON.stringify(songs));
-    // editSong(song);
+    if (user) editSong(song);
   };
 
   return (
     <Context.Provider
       value={{
         songs,
+        user,
+        setUser,
+        playNote,
+        stopPlayingNote,
         isRecord,
         recordStart,
         stop,
@@ -182,9 +187,11 @@ export default function App() {
       }}
     >
       <Header />
-      <Piano />
-      <Buttons />
-      <SongsContainer />
+      <Routes>
+        <Route exact path="/" element={<Main />} />
+        <Route path="Login" element={<Login />} />
+        <Route path="Signup" element={<Signup />} />
+      </Routes>
     </Context.Provider>
   );
 }

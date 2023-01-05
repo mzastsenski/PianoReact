@@ -1,7 +1,7 @@
 const elise1 = {
   id: 1,
   user: "",
-  title: "Elise1",
+  title: "Elise 1",
   song: [
     { key: ";", delay: 1244, delayStop: 1581 },
     { key: "p", delay: 1590, delayStop: 1962 },
@@ -18,7 +18,7 @@ const elise1 = {
 const elise2 = {
   id: 2,
   user: "",
-  title: "Elise2",
+  title: "Elise 2",
   song: [
     { key: ";", delay: 895, delayStop: 1175 },
     { key: "p", delay: 1154, delayStop: 1457 },

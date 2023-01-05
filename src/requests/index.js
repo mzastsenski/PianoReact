@@ -6,8 +6,22 @@ export const postSongToDB = (data) => {
     },
     body: JSON.stringify(data),
   });
-  // .then((res) => res.json())
-  // .then(console.log);
+};
+
+export const checkUser = (setUser) =>
+  fetch("api/checkUser", { method: "POST" })
+    .then((res) => res.json())
+    .then((res) => {
+      if (res !== 200) {
+        setUser("");
+        localStorage.setItem("user", "");
+      }
+    });
+
+export const getSongs = (user, setSongs) => {
+  fetch(`api/getSongs/${user}`)
+    .then((res) => res.json())
+    .then((res) => (res.length ? setSongs(res) : setSongs([])));
 };
 
 export const editSong = (data) => {
@@ -21,7 +35,6 @@ export const editSong = (data) => {
 };
 
 export const deleteSongFromDB = (id) => {
-  console.log(id);
   fetch("api/delete", {
     method: "DELETE",
     headers: {
@@ -31,8 +44,38 @@ export const deleteSongFromDB = (id) => {
   });
 };
 
-export const getAllSongs = (callback) => {
-  fetch("api/get")
+export const login = (data, setUser) => {
+  fetch("api/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+    },
+    body: JSON.stringify(data),
+  })
     .then((res) => res.json())
-    .then((res) => callback(res));
+    .then((res) => {
+      if (res === 401) alert("Login Fault");
+      else {
+        localStorage.setItem("user", data.user);
+        setUser(data.user);
+        window.location.hash = "/";
+      }
+    });
 };
+
+export const signUp = (data) => {
+  fetch("/api/signUp", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      if (res === 401) alert("User exists");
+      else window.location.hash = "/Login";
+    });
+};
+
+export const postLogout = () => fetch("api/logout", { method: "POST" });

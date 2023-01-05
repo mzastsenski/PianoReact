@@ -1,27 +1,12 @@
 const express = require("express");
 require("dotenv").config();
 const router = express.Router();
-const { auth, getUserFromToken } = require("./auth_functions.js");
+const { auth } = require("./auth_functions");
 
 const { MongoClient } = require("mongodb");
+const projection = { projection: { _id: 0 } };
 
-router.get("/api/get", (req, res) => {
-  MongoClient.connect(process.env.MONGO_URI, (err, db) => {
-    if (err) throw err;
-    db.db("piano")
-      .collection("songs")
-      .find({})
-      .toArray((err, result) => {
-        if (err) console.log(err);
-        db.close();
-        res.json(result);
-        console.log(result);
-      });
-  });
-});
-
-router.post("/api/post", (req, res) => {
-  // const user = getUserFromToken(req);
+router.post("/api/post", auth, (req, res) => {
   MongoClient.connect(process.env.MONGO_URI, async (err, db) => {
     if (err) throw err;
     const result = await db.db("piano").collection("songs").insertOne(req.body);
@@ -31,33 +16,41 @@ router.post("/api/post", (req, res) => {
   });
 });
 
-router.put("/api/edit", (req, res) => {
+router.put("/api/edit", auth, (req, res) => {
   MongoClient.connect(process.env.MONGO_URI, async (err, db) => {
     if (err) throw err;
-    const result = await db
-      .db("piano")
-      .collection("songs")
-      .updateOne({ id: req.body.id }, { $set: { title: req.body.title } });
+    const songs = db.db("piano").collection("songs");
+    const result = await songs.updateOne(
+      { id: req.body.id },
+      { $set: { title: req.body.title } }
+    );
+    res.json(result.insertedId);
+    db.close();
+  });
+});
+
+router.delete("/api/delete", auth, (req, res) => {
+  MongoClient.connect(process.env.MONGO_URI, async (err, db) => {
+    if (err) throw err;
+    const songs = db.db("piano").collection("songs");
+    const result = await songs.deleteOne({ id: req.body.id });
     // console.log(`${result.insertedId}`);
     res.json(result.insertedId);
     db.close();
   });
 });
 
-router.delete("/api/delete", (req, res) => {
-  console.log(req.body.id);
+router.get("/api/getSongs/:user", auth, (req, res) => {
+  const user = req.params.user;
   MongoClient.connect(process.env.MONGO_URI, async (err, db) => {
     if (err) throw err;
-    const result = await db
-      .db("piano")
-      .collection("songs")
-      .deleteOne({ id: req.body.id });
-    console.log(`${result.insertedId}`);
-    res.json(result.insertedId);
-    db.close();
+    const songs = db.db("piano").collection("songs");
+    songs.find({ user }, projection).toArray((err, result) => {
+      if (err) throw err;
+      db.close();
+      res.json(result);
+    });
   });
 });
-
-router.get("/api/songs/:user", (req, res) => {});
 
 module.exports = router;

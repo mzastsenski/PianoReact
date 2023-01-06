@@ -19,7 +19,6 @@ const Signup = () => {
     <div className="modal">
       <div className="modal_content">
         <form className="Login" onSubmit={submit}>
-          <div className="Fields">
             <label className="field">
               <input name="user" type="text" placeholder="Username"></input>
             </label>
@@ -37,7 +36,6 @@ const Signup = () => {
                 placeholder="Confirm password"
               ></input>
             </label>
-          </div>
           <br />
           <div className="login_buttons">
             <button type="submit">Sign up</button>

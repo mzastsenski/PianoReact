@@ -1,4 +1,4 @@
-import "./Piano.scss";
+import "./Piano.sass";
 import PianoKey from "./PianoKey";
 
 export default function Piano() {

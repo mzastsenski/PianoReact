@@ -6,7 +6,7 @@ $icon-hover: rgba(255, 255, 255, 0.781)
   position: relative
   background-color: $main-color
   display: grid
-  grid-template-columns: 1fr 180px 40px 26px
+  grid-template-columns: 20fr 1fr
   text-align: center
   align-items: center
   color: white
@@ -17,7 +17,6 @@ $icon-hover: rgba(255, 255, 255, 0.781)
   letter-spacing: 3.2px
   .title 
     font-size: 29px
-    padding-left: 100px
   a 
     color: white
     text-decoration: none  
@@ -31,27 +30,14 @@ $icon-hover: rgba(255, 255, 255, 0.781)
       align-items: center
       position: absolute
       right: 67px
-      top: 23px
+      top: 24px
       // z-index: 3
-  
-  a.active 
-    background-color: transparent
-    color: white
-  
-  .user_name 
-    background-color: $main-color
-    align-self: center
-    color: white
-    &:hover 
-      color: $icon-hover
-      
 
-
-@media (max-width: 768px) 
+@media (max-width: 568px) 
   .header 
+    grid-template-columns: 8fr 5fr
     .title 
       font-size: 22px
-      // padding-left: 110px    
     
   
 

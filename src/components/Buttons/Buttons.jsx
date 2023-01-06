@@ -27,47 +27,51 @@ export default function Buttons() {
 
   return (
     <div className="buttons">
-      <button
-        className="action_button"
-        style={isRecord ? { background: "red", color: "white" } : {}}
-        onClick={recordStart}
-      >
-        <BsRecordCircle size={size} className="record" />
-      </button>
-      <button className="action_button" onClick={stop}>
-        <BsStopCircle size={size} className="stop" />
-      </button>
-      <button
-        className="action_button"
-        style={isPlaying ? { background: "green", color: "white" } : {}}
-        onClick={playRecord}
-      >
-        <BsPlayCircle size={size} className="play" />
-      </button>
+      <div className="action_buttons">
+        <button
+          className="action_button"
+          style={isRecord ? { background: "red", color: "white" } : {}}
+          onClick={recordStart}
+        >
+          <BsRecordCircle size={size} className="record" />
+        </button>
+        <button className="action_button" onClick={stop}>
+          <BsStopCircle size={size} className="stop" />
+        </button>
+        <button
+          className="action_button"
+          style={isPlaying ? { background: "green", color: "white" } : {}}
+          onClick={playRecord}
+        >
+          <BsPlayCircle size={size} className="play" />
+        </button>
 
-      <button className="action_button save" onClick={saveSong}>
-        Save
-      </button>
-      <button
-        className={
-          soundName === "piano1"
-            ? "sound_button sound_button_active"
-            : "sound_button"
-        }
-        onClick={() => setSound(piano1)}
-      >
-        Sound 1
-      </button>
-      <button
-        className={
-          soundName === "piano2"
-            ? "sound_button sound_button_active"
-            : "sound_button"
-        }
-        onClick={() => setSound(piano2)}
-      >
-        Sound 2
-      </button>
+        <button className="action_button save" onClick={saveSong}>
+          Save
+        </button>
+      </div>
+      <di className="sound_buttons">
+        <button
+          className={
+            soundName === "piano1"
+              ? "sound_button sound_button_active"
+              : "sound_button"
+          }
+          onClick={() => setSound(piano1)}
+        >
+          Sound 1
+        </button>
+        <button
+          className={
+            soundName === "piano2"
+              ? "sound_button sound_button_active"
+              : "sound_button"
+          }
+          onClick={() => setSound(piano2)}
+        >
+          Sound 2
+        </button>
+      </di>
     </div>
   );
 }

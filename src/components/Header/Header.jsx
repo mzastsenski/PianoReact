@@ -6,7 +6,7 @@ import BurgerMenu from "../BurgerMenu/BurgerMenu";
 import { NavLink } from "react-router-dom";
 import { BiUser as UserIcon } from "react-icons/bi";
 
-export default function Header(props) {
+export default function Header() {
   const { user } = useContext(Context);
 
   return (
@@ -17,9 +17,9 @@ export default function Header(props) {
         </NavLink>
       </span>
       <div>
-        <NavLink to="/Login" className="user_name">
+        <NavLink to="/Login">
           <span className="login_icons">
-            &nbsp;{user ? user : "Login"}&nbsp;
+            {user ? user : "Login"}&nbsp;
             <UserIcon size={31} />
           </span>
         </NavLink>

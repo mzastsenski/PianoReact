@@ -3,7 +3,7 @@ import PianoKey from "./PianoKey";
 
 export default function Piano() {
   return (
-    <div className="keys">
+    <div className="piano">
       <PianoKey className="key" note="a" />
       <PianoKey className="key sharp" note="w" />
       <PianoKey className="key" note="s" />

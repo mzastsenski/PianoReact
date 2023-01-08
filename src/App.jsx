@@ -8,7 +8,8 @@ import {
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { Context } from "./context";
-import { piano1, piano2, keys } from "./data";
+import { piano1, piano2 } from "./data/sounds";
+import { keys } from "./data/keys";
 import { defaultSongs } from "./data/default_songs";
 import Header from "./components/Header/Header";
 import Main from "./pages/Main";

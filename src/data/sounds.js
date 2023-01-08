@@ -16,7 +16,9 @@ export const piano1 = {
   l: new Audio(`./sounds/054.wav`),
   p: new Audio(`./sounds/055.wav`),
   ";": new Audio(`./sounds/056.wav`),
-  "'": new Audio(`./sounds/f2.mp3`),
+  "'": new Audio(`./sounds/057.mp3`),
+  "]": new Audio(`./sounds/058.wav`),
+  "\\": new Audio(`./sounds/059.wav`),
 };
 export const piano2 = {
   a: new Audio(`./sounds/a.mp3`),
@@ -37,26 +39,6 @@ export const piano2 = {
   p: new Audio(`./sounds/p.mp3`),
   ";": new Audio(`./sounds/e2.mp3`),
   "'": new Audio(`./sounds/f2.mp3`),
+  "]": new Audio(`./sounds/ff2.mp3`),
+  "\\": new Audio(`./sounds/g2.mp3`),
 };
-
-
-export const keys = [
-  "a",
-  "s",
-  "d",
-  "f",
-  "g",
-  "h",
-  "j",
-  "k",
-  "l",
-  "w",
-  "e",
-  "t",
-  "y",
-  "u",
-  "o",
-  "p",
-  ";",
-  "'",
-];

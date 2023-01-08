@@ -11,6 +11,8 @@ $primary-shadow-color: #00000080
 $secondary-shadow-color: #000000b3
 $primary-transition: all 0.1s ease
 $secondary-transition: 0.3s ease
+$m1: -18
+$m2: 18
 
 .piano 
   display: flex
@@ -53,27 +55,28 @@ $secondary-transition: 0.3s ease
 
 
 .sharp[data-note="w"] 
-  margin-right: 74.5rem
-
+  margin-right: $m1 + 92rem
 
 .sharp[data-note="e"] 
-  margin-right: 55.5rem
-
+  margin-right: $m1 + 73.5rem
 
 .sharp[data-note="t"] 
-  margin-right: 18.5rem
+  margin-right: $m1 + 37rem
 
+.sharp[data-note="y"] 
+  margin-right: $m1 + 18.5rem
 
 .sharp[data-note="u"] 
-  margin-left: 19rem
-
+  margin-left: $m2 + 0.5rem
 
 .sharp[data-note="o"] 
-  margin-left: 55.5rem
-
+  margin-left: $m2 + 37rem
 
 .sharp[data-note="p"] 
-  margin-left: 74.5rem
+  margin-left: $m2 + 55.5rem
+
+.sharp[data-note="]"] 
+  margin-left: 91.5rem
 
 .sharp:active,
 .playing 

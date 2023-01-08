@@ -1,5 +1,5 @@
 import "./Buttons.sass";
-import { piano1, piano2 } from "../../data";
+import { piano1, piano2 } from "../../data/sounds";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
 import { Context } from "../../context";

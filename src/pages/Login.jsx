@@ -1,5 +1,4 @@
-import "./Modal.scss";
-import "./Login.scss";
+import "./Auth.sass";
 import { login, postLogout } from "../requests";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -36,7 +35,7 @@ const Login = () => {
   };
 
   const jsx1 = (
-    <form className="Login" onSubmit={submit}>
+    <form className="login" onSubmit={submit}>
       <label className="field">
         <input name="user" type="text" placeholder="Username"></input>
       </label>

@@ -1,5 +1,4 @@
-import "./Modal.scss";
-import "./Login.scss";
+import "./Auth.sass";
 import { NavLink } from "react-router-dom";
 import { signUp } from "../requests";
 
@@ -18,7 +17,7 @@ const Signup = () => {
   return (
     <div className="modal">
       <div className="modal_content">
-        <form className="Login" onSubmit={submit}>
+        <form className="signup" onSubmit={submit}>
             <label className="field">
               <input name="user" type="text" placeholder="Username"></input>
             </label>

@@ -1,16 +1,17 @@
 import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { BsPlayFill as PlayIcon, BsStopFill as StopIcon } from "react-icons/bs";
 import { ImCross as DeleteIcon } from "react-icons/im";
 import {
   deleteSong,
-  playSong,
   saveTitle,
   setActiveSong,
   stop,
 } from "../../redux/dataSlice";
-import { useDispatch } from "react-redux";
+import { playSong } from "../../helpers/playFunctions";
 
 export default function Songs({ song }) {
+  const { soundName } = useSelector((state) => state.data);
   const dispatch = useDispatch();
   const [val, setVal] = useState(song.title);
 
@@ -19,7 +20,7 @@ export default function Songs({ song }) {
   }, [song.title]);
 
   const click = () => {
-    dispatch(playSong(song.song));
+    playSong(dispatch, song.song, soundName);
     dispatch(setActiveSong(song));
   };
 

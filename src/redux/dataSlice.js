@@ -22,6 +22,15 @@ export const dataSlice = createSlice({
     setUser: (state, action) => {
       state.user = action.payload;
     },
+    setPlaying: (state, action) => {
+      state.isPlaying = action.payload;
+    },
+    setActiveNote: (state, action) => {
+      state.activeNote = action.payload;
+    },
+    setTimeoutArr: (state, action) => {
+      state.timeoutArr = action.payload;
+    },
     setSongs: (state, action) => {
       state.songs = action.payload;
     },
@@ -59,74 +68,6 @@ export const dataSlice = createSlice({
       state.isRecord = false;
       state.isPlaying = false;
       state.timeoutArr.forEach((e) => clearTimeout(e));
-    },
-
-    playSong: (state, action) => {
-      const song = action.payload;
-      state.isRecord = false;
-      state.isPlaying = false;
-      state.timeoutArr.forEach((e) => clearTimeout(e));
-      state.isPlaying = true;
-      let sound = piano1;
-      if (state.soundName === "piano2") sound = piano2;
-      const arr = [];
-      song.forEach((e, i) => {
-        const timeout = setTimeout(() => {
-          sound[e.key].currentTime = 0;
-          sound[e.key].play();
-          state.activeNote = e.key;
-          if (i > 0 && e.key === song[i - 1].key)
-            state.activeNote = `${e.key}${e.key}`; ///  if note will repeat
-          if (i > 1 && e.key === song[i - 2].key) state.activeNote = e.key;
-          if (i > 2 && e.key === song[i - 3].key)
-            state.activeNote = `${e.key}${e.key}`;
-        }, e.delay);
-        arr.push(timeout);
-        if (i === song.length - 1) {
-          const timeout2 = setTimeout(() => {
-            state.isPlaying = false;
-          }, e.delay + 1000);
-          arr.push(timeout2);
-        }
-        // setTimeout(() => {
-        //   sound[e.key].pause();
-        // }, e.delayStop);
-      });
-      state.timeoutArr = arr;
-    },
-
-    playRecord: (state) => {
-      let song;
-      if (state.record.length) song = state.record;
-      else if (state.activeSong.song) song = state.activeSong.song;
-      let sound = piano1;
-      if (state.soundName === "piano2") sound = piano2;
-      const arr = [];
-      song.forEach((e, idx) => {
-        const key = e.key;
-        const i = idx;
-        const timeout = setTimeout(() => {
-          sound[key].currentTime = 0;
-          sound[key].play();
-          state.activeNote = key;
-          if (i > 0 && key === song[i - 1].key)
-            state.activeNote = `${key}${key}`; ///  if note will repeat
-          if (i > 1 && key === song[i - 2].key) state.activeNote = key;
-          if (i > 2 && key === song[i - 3].key)
-            state.activeNote = `${key}${key}`;
-        }, e.delay);
-        arr.push(timeout);
-        if (i === song.length - 1) {
-          const timeout2 = setTimeout(() => {
-            state.isPlaying = false;
-          }, e.delay + 1000);
-          arr.push(timeout2);
-        }
-        // setTimeout(() => {
-        //   sound[key].pause();
-        // }, e.delayStop);
-      });
-      state.timeoutArr = arr;
     },
 
     saveSong: (state) => {
@@ -167,14 +108,15 @@ export const {
   setSongs,
   setSound,
   setOpened,
+  setPlaying,
+  setActiveNote,
   setActiveSong,
+  setTimeoutArr,
   recordStart,
   stop,
-  playRecord,
   saveSong,
   saveTitle,
   playNoteTouch,
-  playSong,
   deleteSong,
 } = dataSlice.actions;
 

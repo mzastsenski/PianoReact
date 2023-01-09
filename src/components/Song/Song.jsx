@@ -3,13 +3,15 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   deleteSong,
-  playSong,
   saveTitle,
   setActiveSong,
 } from "../../redux/dataSlice";
+import { playSong } from "../../helpers/playFunctions";
 
 export default function Songs({ song }) {
-  const { isPlaying, activeSong } = useSelector((state) => state.data);
+  const { isPlaying, activeSong, soundName } = useSelector(
+    (state) => state.data
+  );
   const dispatch = useDispatch();
   const [val, setVal] = useState(song.title);
 
@@ -18,7 +20,7 @@ export default function Songs({ song }) {
   }, [song.title]);
 
   const click = () => {
-    dispatch(playSong(song.song));
+    playSong(dispatch, song.song, soundName);
     dispatch(setActiveSong(song));
   };
 

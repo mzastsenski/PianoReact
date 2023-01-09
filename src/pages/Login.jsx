@@ -33,7 +33,7 @@ const Login = () => {
 
   const logout = () => {
     localStorage.setItem("user", "");
-    setUser("");
+    dispatch(setUser(""));
     postLogout();
     navigate("/");
   };
@@ -65,7 +65,7 @@ const Login = () => {
   );
 
   const jsx2 = (
-    <div className="Login">
+    <div className="login">
       <div className="login-info">
         <>You are logged as {localStorage.getItem("user")}</>
       </div>

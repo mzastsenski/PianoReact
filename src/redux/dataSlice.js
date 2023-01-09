@@ -8,7 +8,7 @@ export const dataSlice = createSlice({
   initialState: {
     user: "",
     soundName: "piano1",
-    songs: defaultSongs,
+    songs: [],
     isRecord: false,
     isPlaying: false,
     startTime: 0,
@@ -93,12 +93,12 @@ export const dataSlice = createSlice({
     saveTitle: (state, action) => {
       const { text, song } = action.payload;
       const newSongs = [...state.songs];
-      const finded = newSongs.find((e) => e.id === song.id);
-      finded.title = text;
+      const newSong = newSongs.find((e) => e.id === song.id);
+      newSong.title = text;
       state.songs = newSongs;
       if (!state.user)
         localStorage.setItem("songs", JSON.stringify(state.songs));
-      if (state.user) editSong(song);
+      if (state.user) editSong(newSong);
     },
   },
 });

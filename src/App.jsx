@@ -22,8 +22,11 @@ export default function App() {
     } else {
       if (localStorage.getItem("songs")) {
         const localSongs = JSON.parse(localStorage.getItem("songs"));
-        if (localSongs.length) dispatch(setSongs(localSongs));
-        else dispatch(setSongs(defaultSongs));
+        localSongs.length
+          ? dispatch(setSongs(localSongs))
+          : dispatch(setSongs(defaultSongs));
+      } else {
+        dispatch(setSongs(defaultSongs));
       }
     }
   }, [user, dispatch]);

@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { useContext } from "react";
-import { Context } from "../../context";
+import { useSelector, useDispatch } from "react-redux";
+import { playNoteTouch } from "../../redux/dataSlice";
 
 export default function PianoKey({ className, note }) {
-  const { playNoteTouch, activeNote } = useContext(Context);
+  const activeNote = useSelector((state) => state.data.activeNote);
+  const dispatch = useDispatch();
 
   const [active, setActive] = useState(false);
 
@@ -33,7 +34,7 @@ export default function PianoKey({ className, note }) {
     <div
       className={active ? `${className} playing` : `${className}`}
       data-note={note}
-      onClick={() => playNoteTouch(note)}
+      onClick={() => dispatch(playNoteTouch(note))}
     ></div>
   );
 }

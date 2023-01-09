@@ -2,11 +2,13 @@ import "./Auth.sass";
 import { login, postLogout } from "../requests";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect, useContext } from "react";
-import { Context } from "../context";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setUser } from "../redux/dataSlice";
 
 const Login = () => {
-  const { user, setUser } = useContext(Context);
+  const { user } = useSelector((state) => state.data);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [style, setStyle] = useState({
@@ -24,7 +26,9 @@ const Login = () => {
     e.preventDefault();
     const user = e.target.user.value;
     const pass = e.target.password.value;
-    user && pass ? login({ user, pass }, setUser) : alert("Enter your data");
+    user && pass
+      ? login({ user, pass }, setUser, dispatch)
+      : alert("Enter your data");
   };
 
   const logout = () => {

@@ -8,7 +8,7 @@ export const postSongToDB = (data) => {
   });
 };
 
-export const checkUser = (user, setUser) =>
+export const checkUser = (user, setUser, dispatch) =>
   fetch("api/checkUser", {
     method: "POST",
     headers: {
@@ -19,17 +19,16 @@ export const checkUser = (user, setUser) =>
     .then((res) => res.json())
     .then((res) => {
       if (res !== 200) {
-        setUser("");
+        dispatch(setUser(""));
         localStorage.setItem("user", "");
       }
     });
 
-export const getSongs = (user, setSongs) => {
+export const getSongs = (user, setSongs, dispatch) => {
   fetch(`api/getSongs/${user}`)
     .then((res) => res.json())
     .then((res) => {
-      console.log(res)
-      res.length ? setSongs(res) : setSongs([]);
+      res.length ? dispatch(setSongs(res)) : dispatch(setSongs([]));
     });
 };
 
@@ -53,7 +52,7 @@ export const deleteSongFromDB = (id) => {
   });
 };
 
-export const login = (data, setUser) => {
+export const login = (data, setUser, dispatch) => {
   fetch("api/login", {
     method: "POST",
     headers: {
@@ -66,7 +65,7 @@ export const login = (data, setUser) => {
       if (res === 401) alert("Login Fault");
       else {
         localStorage.setItem("user", data.user);
-        setUser(data.user);
+        dispatch(setUser(data.user));
         window.location.hash = "/";
       }
     });

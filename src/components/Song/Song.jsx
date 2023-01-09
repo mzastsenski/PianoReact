@@ -1,17 +1,16 @@
 import "./Song.sass";
 import { useState, useEffect } from "react";
-import { useContext } from "react";
-import { Context } from "../../context";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  deleteSong,
+  playSong,
+  saveTitle,
+  setActiveSong,
+} from "../../redux/dataSlice";
 
 export default function Songs({ song }) {
-  const {
-    deleteSong,
-    isPlaying,
-    playSong,
-    saveTitle,
-    activeSong,
-    setActiveSong,
-  } = useContext(Context);
+  const { isPlaying, activeSong } = useSelector((state) => state.data);
+  const dispatch = useDispatch();
   const [val, setVal] = useState(song.title);
 
   useEffect(() => {
@@ -19,8 +18,13 @@ export default function Songs({ song }) {
   }, [song.title]);
 
   const click = () => {
-    playSong(song.song);
-    setActiveSong(song);
+    dispatch(playSong(song.song));
+    dispatch(setActiveSong(song));
+  };
+
+  const deleteClick = (e) => {
+    e.stopPropagation();
+    dispatch(deleteSong(song.id));
   };
 
   return (
@@ -43,9 +47,9 @@ export default function Songs({ song }) {
         onChange={(e) => setVal(e.target.value)}
         onClick={(e) => e.stopPropagation()}
         onKeyPress={(e) => e.key === "Enter" && e.target.blur()}
-        onBlur={(e) => saveTitle(e.target.value, song)}
+        onBlur={(e) => dispatch(saveTitle({ text: e.target.value, song }))}
       />
-      <button className="delete_button" onClick={(e) => deleteSong(e, song.id)}>
+      <button className="delete_button" onClick={(e) => deleteClick(e)}>
         X
       </button>
     </div>

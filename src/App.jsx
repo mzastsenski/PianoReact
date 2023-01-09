@@ -38,13 +38,13 @@ export default function App() {
   }, [songs]);
 
   return (
-    <div>
+    <>
       <Header />
       <Routes>
         <Route exact path="/" element={<Main />} />
         <Route path="Login" element={<Login />} />
         <Route path="Signup" element={<Signup />} />
       </Routes>
-    </div>
+    </>
   );
 }

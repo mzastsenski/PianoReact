@@ -17,6 +17,7 @@ export const playSong = (dispatch, song, soundName) => {
       sound[e.key].currentTime = 0;
       sound[e.key].play();
       dispatch(setActiveNote(e.key));
+
       if (i > 0 && e.key === song[i - 1].key)
         dispatch(setActiveNote(`${e.key}${e.key}`)); ///  if note will repeat
       if (i > 1 && e.key === song[i - 2].key) dispatch(setActiveNote(e.key));
@@ -24,12 +25,22 @@ export const playSong = (dispatch, song, soundName) => {
         dispatch(setActiveNote(`${e.key}${e.key}`));
     }, e.delay);
     arr.push(timeout);
+
     if (i === song.length - 1) {
       const timeout2 = setTimeout(() => {
         dispatch(setPlaying(false));
       }, e.delay + 1000);
       arr.push(timeout2);
     }
+
+    // if (soundName === "piano2") {
+    //   console.log(e)
+    //   const timeoutStop = setTimeout(() => {
+    //     sound[e.key].pause();
+    //   }, e.delayStop);
+    //   arr.push(timeoutStop);
+    // }
+
     // setTimeout(() => {
     //   sound[e.key].pause();
     // }, e.delayStop);

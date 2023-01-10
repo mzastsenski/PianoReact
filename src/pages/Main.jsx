@@ -36,6 +36,7 @@ export default function Main() {
   };
 
   const stopPlayingNote = (e) => {
+    console.log(e)
     let sound = piano1;
     if (soundName === "piano2") sound = piano2;
     if (keys.indexOf(e.key) < 0) return;
@@ -43,10 +44,11 @@ export default function Main() {
       setTimeout(() => {
         sound[e.key].pause();
       }, 100);
-      if (isRecord) {
-        const findet = record.find((el) => e.key === el.key && !el.delayStop);
-        findet.delayStop = Date.now() - startTime;
-      }
+    }
+    if (isRecord) {
+      const finded = record.find((el) => e.key === el.key && !el.delayStop);
+      console.log(finded)
+      finded.delayStop = Date.now() - startTime;
     }
   };
 

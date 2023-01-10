@@ -11,6 +11,7 @@ export const dataSlice = createSlice({
     songs: [],
     isRecord: false,
     isPlaying: false,
+    recordPlaying: false,
     startTime: 0,
     record: [],
     activeSong: defaultSongs[0],
@@ -24,6 +25,9 @@ export const dataSlice = createSlice({
     },
     setPlaying: (state, action) => {
       state.isPlaying = action.payload;
+    },
+    setRecordPlaying: (state, action) => {
+      state.recordPlaying = action.payload;
     },
     setActiveNote: (state, action) => {
       state.activeNote = action.payload;
@@ -47,14 +51,14 @@ export const dataSlice = createSlice({
     playNoteTouch: (state, action) => {
       const e = action.payload;
       let sound = piano1;
-      if (state.sound === "piano2") sound = piano2;
+      if (state.soundName === "piano2") sound = piano2;
       sound[e].currentTime = 0;
       sound[e].play();
       if (state.isRecord) {
         state.record.push({
           key: e,
           delay: Date.now() - state.startTime,
-          delayStop: null,
+          delayStop: Date.now() - state.startTime + 800,
         });
       }
     },
@@ -65,6 +69,7 @@ export const dataSlice = createSlice({
     },
 
     stop: (state) => {
+      if (state.isRecord) state.recordPlaying = false;
       state.isRecord = false;
       state.isPlaying = false;
       state.timeoutArr.forEach((e) => clearTimeout(e));
@@ -112,6 +117,7 @@ export const {
   setActiveNote,
   setActiveSong,
   setTimeoutArr,
+  setRecordPlaying,
   recordStart,
   stop,
   saveSong,

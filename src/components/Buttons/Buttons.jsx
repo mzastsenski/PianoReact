@@ -1,7 +1,13 @@
 import "./Buttons.sass";
 import { BsRecordCircle, BsStopCircle, BsPlayCircle } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
-import { recordStart, saveSong, setSound, stop } from "../../redux/dataSlice";
+import {
+  recordStart,
+  setRecordPlaying,
+  saveSong,
+  setSound,
+  stop,
+} from "../../redux/dataSlice";
 import { playSong } from "../../helpers/playFunctions";
 
 export default function Buttons() {
@@ -11,8 +17,13 @@ export default function Buttons() {
   const dispatch = useDispatch();
 
   const playRecord = () => {
-    if (record.length) playSong(dispatch, record, soundName);
-    else if (activeSong.song) playSong(dispatch, activeSong.song, soundName);
+    if (record.length) {
+      dispatch(setRecordPlaying(true));
+      playSong(dispatch, record, soundName);
+    } else if (activeSong.song) {
+      dispatch(setRecordPlaying(false));
+      playSong(dispatch, activeSong.song, soundName);
+    }
   };
 
   const size = 40;

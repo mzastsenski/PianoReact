@@ -5,11 +5,12 @@ import {
   deleteSong,
   saveTitle,
   setActiveSong,
+  setRecordPlaying,
 } from "../../redux/dataSlice";
 import { playSong } from "../../helpers/playFunctions";
 
 export default function Songs({ song }) {
-  const { isPlaying, activeSong, soundName } = useSelector(
+  const { isPlaying, activeSong, soundName, recordPlaying } = useSelector(
     (state) => state.data
   );
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ export default function Songs({ song }) {
 
   const click = () => {
     playSong(dispatch, song.song, soundName);
+    dispatch(setRecordPlaying(false));
     dispatch(setActiveSong(song));
   };
 
@@ -33,7 +35,7 @@ export default function Songs({ song }) {
     <div
       className="song"
       style={
-        isPlaying && activeSong && activeSong.id === song.id
+        isPlaying && !recordPlaying && activeSong && activeSong.id === song.id
           ? { background: "green", color: "white" }
           : {}
       }
@@ -41,7 +43,7 @@ export default function Songs({ song }) {
     >
       <input
         style={
-          isPlaying && activeSong && activeSong.id === song.id
+          isPlaying && !recordPlaying && activeSong && activeSong.id === song.id
             ? { background: "green", color: "white" }
             : {}
         }

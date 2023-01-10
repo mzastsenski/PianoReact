@@ -33,17 +33,14 @@ export const playSong = (dispatch, song, soundName) => {
       arr.push(timeout2);
     }
 
-    // if (soundName === "piano2") {
-    //   console.log(e)
-    //   const timeoutStop = setTimeout(() => {
-    //     sound[e.key].pause();
-    //   }, e.delayStop);
-    //   arr.push(timeoutStop);
-    // }
-
-    // setTimeout(() => {
-    //   sound[e.key].pause();
-    // }, e.delayStop);
+    if (soundName === "piano2") {
+      console.log(e)
+      const timeoutStop = setTimeout(() => {
+        sound[e.key].pause();
+      }, e.delayStop);
+      arr.push(timeoutStop);
+    }
+    
   });
   dispatch(setTimeoutArr(arr));
 };

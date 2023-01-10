@@ -36,7 +36,7 @@ export default function Main() {
   };
 
   const stopPlayingNote = (e) => {
-    console.log(e)
+    // console.log(e.key);
     let sound = piano1;
     if (soundName === "piano2") sound = piano2;
     if (keys.indexOf(e.key) < 0) return;
@@ -46,8 +46,11 @@ export default function Main() {
       }, 100);
     }
     if (isRecord) {
-      const finded = record.find((el) => e.key === el.key && !el.delayStop);
-      console.log(finded)
+      const finded = record.find((el) => {
+        // console.log(el)
+        return e.key === el.key && !el.delayStop;
+      });
+      // console.log(finded);
       finded.delayStop = Date.now() - startTime;
     }
   };

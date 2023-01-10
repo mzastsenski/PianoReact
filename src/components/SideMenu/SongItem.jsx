@@ -7,6 +7,7 @@ import {
   saveTitle,
   setActiveSong,
   stop,
+  setRecordPlaying,
 } from "../../redux/dataSlice";
 import { playSong } from "../../helpers/playFunctions";
 
@@ -21,7 +22,13 @@ export default function Songs({ song }) {
 
   const click = () => {
     playSong(dispatch, song.song, soundName);
+    dispatch(setRecordPlaying(false));
     dispatch(setActiveSong(song));
+  };
+
+  const deleteClick = (e) => {
+    e.stopPropagation();
+    dispatch(deleteSong(song.id));
   };
 
   return (
@@ -38,10 +45,7 @@ export default function Songs({ song }) {
       <button className="active_button stop" onClick={() => dispatch(stop())}>
         <StopIcon size={20} />
       </button>
-      <button
-        className="active_button delete"
-        onClick={(e) => dispatch(deleteSong({ e, id: song.id }))}
-      >
+      <button className="active_button delete" onClick={(e) => deleteClick(e)}>
         <DeleteIcon size={14} />
       </button>
     </div>

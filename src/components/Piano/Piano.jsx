@@ -20,11 +20,10 @@ export default function Piano() {
       <PianoKey className="key sharp" note="o" />
       <PianoKey className="key" note="l" />
       <PianoKey className="key sharp" note="p" />
-      <PianoKey className="key" note=";" />
-      {/* <PianoKey className="key" note="'" /> */}
-      {/* <PianoKey className="key sharp" note="]" />
-      <PianoKey className="key" note="\" /> */}
-
+      <PianoKey className="key" note=";" noteDe="ö" />
+      {/* <PianoKey className="key" note="'" noteDe="ä"/> */}
+      {/* <PianoKey className="key sharp" note="]" noteDe="+"/>
+      <PianoKey className="key" note="\" noteDe="#"/> */}
     </div>
   );
 }

@@ -1,13 +1,14 @@
 import "./BurgerMenu.sass";
-import { useContext } from "react";
-import { Context } from "../../context";
+import { useSelector, useDispatch } from "react-redux";
+import { setOpened } from "../../redux/dataSlice";
 
 export default function BurgerMenu() {
-  const {  menuOpened, setOpened } = useContext(Context);
+  const menuOpened = useSelector((state) => state.data.menuOpened);
+  const dispatch = useDispatch();
   return (
     <div
       className={menuOpened ? "burger-menu menu-opened" : "burger-menu"}
-      onClick={() => setOpened(!menuOpened)}
+      onClick={() => dispatch(setOpened(!menuOpened))}
     >
       <div></div>
       <div></div>

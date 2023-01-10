@@ -1,10 +1,10 @@
 import "./SideMenu.sass";
-import { useContext } from "react";
-import { Context } from "../../context";
 import SongItem from "./SongItem";
+import { useSelector } from "react-redux";
 
 export default function CardsList() {
-  const { menuOpened, songs } = useContext(Context);
+  const songs = useSelector((state) => state.data.songs);
+  const menuOpened = useSelector((state) => state.data.menuOpened);
 
   return (
     <div className={menuOpened ? "side_menu show" : "side_menu"}>

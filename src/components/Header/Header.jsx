@@ -1,13 +1,12 @@
 import "./Header.sass";
-import { useContext } from "react";
-import { Context } from "../../context";
 import SideMenu from "../SideMenu/SideMenu";
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
 import { NavLink } from "react-router-dom";
 import { BiUser as UserIcon } from "react-icons/bi";
+import { useSelector  } from "react-redux";
 
 export default function Header() {
-  const { user } = useContext(Context);
+  const user = useSelector((state) => state.data.user);
 
   return (
     <div className="header">

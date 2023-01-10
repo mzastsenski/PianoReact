@@ -128,11 +128,6 @@ export default function App() {
     setTimeoutArr(arr);
   };
 
-  const playRecord = () => {
-    if (record.length) playSong(record);
-    else if (activeSong.song) playSong(activeSong.song);
-  };
-
   const saveSong = () => {
     if (record.length) {
       const newSong = {
@@ -165,6 +160,7 @@ export default function App() {
       value={{
         songs,
         user,
+        record,
         setUser,
         playNote,
         stopPlayingNote,
@@ -172,7 +168,6 @@ export default function App() {
         recordStart,
         stop,
         isPlaying,
-        playRecord,
         saveSong,
         sound,
         setSound,

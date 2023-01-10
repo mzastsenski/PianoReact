@@ -11,10 +11,12 @@ export default function Buttons() {
     recordStart,
     stop,
     isPlaying,
-    playRecord,
     saveSong,
     sound,
     setSound,
+    record,
+    activeSong,
+    playSong,
   } = useContext(Context);
 
   const [soundName, setSoundName] = useState("");
@@ -22,6 +24,13 @@ export default function Buttons() {
   useEffect(() => {
     sound === piano1 ? setSoundName("piano1") : setSoundName("piano2");
   }, [sound]);
+
+  const playRecord = () => {
+    console.log(record);
+    console.log(activeSong);
+    if (record.length) playSong(record);
+    else if (activeSong.song) playSong(activeSong.song);
+  };
 
   let size = 40;
 
@@ -50,7 +59,7 @@ export default function Buttons() {
           Save
         </button>
       </div>
-      <di className="sound_buttons">
+      <div className="sound_buttons">
         <button
           className={
             soundName === "piano1"
@@ -71,7 +80,7 @@ export default function Buttons() {
         >
           Sound 2
         </button>
-      </di>
+      </div>
     </div>
   );
 }

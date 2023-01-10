@@ -48,6 +48,18 @@ export const dataSlice = createSlice({
       state.menuOpened = action.payload;
     },
 
+    addToRecordBuffer: (state, action) => {
+      state.record.push(action.payload);
+    },
+
+    changeDelayStop: (state, action) => {
+      const { key, date } = action.payload;
+      const finded = state.record.find((el) => {
+        return key === el.key && !el.delayStop;
+      });
+      finded.delayStop = date - state.startTime;
+    },
+
     playNoteTouch: (state, action) => {
       const e = action.payload;
       let sound = piano1;
@@ -118,6 +130,8 @@ export const {
   setActiveSong,
   setTimeoutArr,
   setRecordPlaying,
+  addToRecordBuffer,
+  changeDelayStop,
   recordStart,
   stop,
   saveSong,

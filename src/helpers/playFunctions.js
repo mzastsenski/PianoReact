@@ -34,7 +34,7 @@ export const playSong = (dispatch, song, soundName) => {
     }
 
     if (soundName === "piano2") {
-      console.log(e)
+      // console.log(e)
       const timeoutStop = setTimeout(() => {
         sound[e.key].pause();
       }, e.delayStop);

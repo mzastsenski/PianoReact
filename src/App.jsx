@@ -7,7 +7,7 @@ import Main from "./pages/Main";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import { useSelector, useDispatch } from "react-redux";
-import { setUser, setSongs } from "./redux/dataSlice";
+import { setUser, setSongs, setActiveSong } from "./redux/dataSlice";
 
 export default function App() {
   const { user, songs } = useSelector((state) => state.data);

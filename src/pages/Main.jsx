@@ -2,14 +2,14 @@ import Piano from "../components/Piano/Piano";
 import Buttons from "../components/Buttons/Buttons";
 import SongsContainer from "../components/SongsContainer/SongsContainer";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { piano1, piano2 } from "../data/sounds";
 import { keys } from "../data/keys";
+import { addToRecordBuffer, changeDelayStop } from "../redux/dataSlice";
 
 export default function Main() {
-  const { soundName, record, isRecord, startTime } = useSelector(
-    (state) => state.data
-  );
+  const { soundName, isRecord, startTime } = useSelector((state) => state.data);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     window.addEventListener("keydown", playNote);
@@ -27,16 +27,18 @@ export default function Main() {
     sound[e.key].currentTime = 0;
     sound[e.key].play();
     if (isRecord) {
-      record.push({
-        key: e.key,
-        delay: Date.now() - startTime,
-        delayStop: null,
-      });
+      dispatch(
+        addToRecordBuffer({
+          key: e.key,
+          delay: Date.now() - startTime,
+          delayStop: null,
+        })
+      );
     }
   };
 
   const stopPlayingNote = (e) => {
-    // console.log(e.key);
+    const date = Date.now();
     let sound = piano1;
     if (soundName === "piano2") sound = piano2;
     if (keys.indexOf(e.key) < 0) return;
@@ -46,12 +48,7 @@ export default function Main() {
       }, 100);
     }
     if (isRecord) {
-      const finded = record.find((el) => {
-        // console.log(el)
-        return e.key === el.key && !el.delayStop;
-      });
-      // console.log(finded);
-      finded.delayStop = Date.now() - startTime;
+      dispatch(changeDelayStop({ key: e.key, date }));
     }
   };
 

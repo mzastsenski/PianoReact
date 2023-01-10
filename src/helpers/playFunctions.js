@@ -36,8 +36,3 @@ export const playSong = (dispatch, song, soundName) => {
   });
   dispatch(setTimeoutArr(arr));
 };
-
-export const playRecord = (dispatch, soundName, record, activeSong) => {
-  if (record.length) playSong(dispatch, record, soundName);
-  else if (activeSong.song) playSong(dispatch, activeSong.song, soundName);
-};

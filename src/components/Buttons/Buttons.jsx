@@ -2,13 +2,19 @@ import "./Buttons.sass";
 import { BsRecordCircle, BsStopCircle, BsPlayCircle } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
 import { recordStart, saveSong, setSound, stop } from "../../redux/dataSlice";
-import { playRecord } from "../../helpers/playFunctions";
+import { playSong } from "../../helpers/playFunctions";
 
 export default function Buttons() {
   const { soundName, isPlaying, isRecord, record, activeSong } = useSelector(
     (state) => state.data
   );
   const dispatch = useDispatch();
+
+  const playRecord = () => {
+    if (record.length) playSong(dispatch, record, soundName);
+    else if (activeSong.song) playSong(dispatch, activeSong.song, soundName);
+  };
+
   const size = 40;
 
   return (
@@ -27,7 +33,7 @@ export default function Buttons() {
         <button
           className="action_button"
           style={isPlaying ? { background: "green", color: "white" } : {}}
-          onClick={() => playRecord(dispatch, soundName, record, activeSong)}
+          onClick={() => playRecord()}
         >
           <BsPlayCircle size={size} className="play" />
         </button>

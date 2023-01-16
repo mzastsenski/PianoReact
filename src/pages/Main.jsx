@@ -21,9 +21,9 @@ export default function Main() {
   });
 
   const playNote = (e) => {
+    if (keys.indexOf(e.key) < 0 || e.repeat) return;
     let sound = piano1;
     if (soundName === "piano2") sound = piano2;
-    if (keys.indexOf(e.key) < 0 || e.repeat) return;
     sound[e.key].currentTime = 0;
     sound[e.key].play();
     if (isRecord) {

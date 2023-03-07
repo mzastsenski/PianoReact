@@ -206,4 +206,162 @@ const elochka = {
   ],
 };
 
-export const defaultSongs = [elise1, elise2, elochka];
+const ode = {
+  id: 4,
+  user: "",
+  title: "Ode",
+  song: [
+    {
+      key: "j",
+      delay: 1567,
+      delayStop: 1844,
+    },
+    {
+      key: "j",
+      delay: 2159,
+      delayStop: 2317,
+    },
+    {
+      key: "k",
+      delay: 2687,
+      delayStop: 2756,
+    },
+    {
+      key: "l",
+      delay: 3176,
+      delayStop: 3260,
+    },
+    {
+      key: "l",
+      delay: 3692,
+      delayStop: 3767,
+    },
+    {
+      key: "k",
+      delay: 4246,
+      delayStop: 4329,
+    },
+    {
+      key: "j",
+      delay: 4730,
+      delayStop: 4871,
+    },
+    {
+      key: "h",
+      delay: 5226,
+      delayStop: 5366,
+    },
+    {
+      key: "g",
+      delay: 5773,
+      delayStop: 5860,
+    },
+    {
+      key: "g",
+      delay: 6284,
+      delayStop: 6378,
+    },
+    {
+      key: "h",
+      delay: 6789,
+      delayStop: 6884,
+    },
+    {
+      key: "j",
+      delay: 7251,
+      delayStop: 7365,
+    },
+    {
+      key: "j",
+      delay: 7734,
+      delayStop: 7829,
+    },
+    {
+      key: "h",
+      delay: 8579,
+      delayStop: 8651,
+    },
+    {
+      key: "h",
+      delay: 8871,
+      delayStop: 8954,
+    },
+    {
+      key: "j",
+      delay: 9973,
+      delayStop: 10101,
+    },
+    {
+      key: "j",
+      delay: 10470,
+      delayStop: 10586,
+    },
+    {
+      key: "k",
+      delay: 10991,
+      delayStop: 11103,
+    },
+    {
+      key: "l",
+      delay: 11447,
+      delayStop: 11551,
+    },
+    {
+      key: "l",
+      delay: 11921,
+      delayStop: 12037,
+    },
+    {
+      key: "k",
+      delay: 12381,
+      delayStop: 12500,
+    },
+    {
+      key: "j",
+      delay: 12864,
+      delayStop: 13014,
+    },
+    {
+      key: "h",
+      delay: 13371,
+      delayStop: 13477,
+    },
+    {
+      key: "g",
+      delay: 13867,
+      delayStop: 13984,
+    },
+    {
+      key: "g",
+      delay: 14362,
+      delayStop: 14443,
+    },
+    {
+      key: "h",
+      delay: 14925,
+      delayStop: 15007,
+    },
+    {
+      key: "j",
+      delay: 15405,
+      delayStop: 15547,
+    },
+    {
+      key: "h",
+      delay: 15959,
+      delayStop: 16086,
+    },
+    {
+      key: "g",
+      delay: 16883,
+      delayStop: 16976,
+    },
+    {
+      key: "g",
+      delay: 17183,
+      delayStop: 17279,
+    },
+  ],
+};
+
+export const defaultSongs = [elise1, elise2, ode];

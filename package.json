@@ -19,13 +19,13 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "PORT=3030 react-scripts start",
+    "start": "PORT=3003 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "server": "cd api && npm run server",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://192.168.5.20:4000",
+  "proxy": "https://piano.mzas.de",
   "eslintConfig": {
     "extends": [
       "react-app",
